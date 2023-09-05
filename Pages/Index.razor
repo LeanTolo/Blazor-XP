@@ -1,0 +1,32 @@
+﻿@page "/"
+@inject MenuState menuState
+@inject IRefreshService RefreshService
+
+
+<PageTitle>Index</PageTitle>
+
+    <h1>Hello, world!</h1>
+
+
+
+@if (menuState.ShowMenu == true)
+{
+    <FooterMenu></FooterMenu>
+}
+<Footer></Footer>
+
+@code {
+
+    protected override async Task OnInitializedAsync()
+    {
+        menuState.ShowMenu = false;
+        RefreshService.RefreshRequested += StateHasChanged;
+    }
+
+    void OnClickMenu(MouseEventArgs e)
+    {
+        menuState.ShowMenu = true;
+        StateHasChanged();
+    }
+
+}

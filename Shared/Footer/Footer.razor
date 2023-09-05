@@ -1,0 +1,56 @@
+﻿@inject IJSRuntime JSRuntime;
+@inject MenuState menuState;
+@inject IRefreshService RefreshService
+
+
+<MudLayout>
+    <MudContainer Class="p-0 m-0 fixed-bottom mw-100 d-flex" Style="height: 30px;background: linear-gradient(rgb(31, 47, 134) 0px, rgb(49, 101, 196) 3%, rgb(54, 130, 229) 6%, rgb(68, 144, 230) 10%, rgb(56, 131, 229) 12%, rgb(43, 113, 224) 15%, rgb(38, 99, 218) 18%, rgb(35, 91, 214) 20%, rgb(34, 88, 213) 23%, rgb(33, 87, 214) 38%, rgb(36, 93, 219) 54%, rgb(37, 98, 223) 86%, rgb(36, 95, 220) 89%, rgb(33, 88, 212) 92%, rgb(29, 78, 192) 95%, rgb(25, 65, 165) 98%);">
+        <MudItem xs="8" sm="10" md="11" Class="p-0 m-0">
+            <MudImage @onclick="OpenMenu" @onmouseover="MouseOver" @onmouseout="MouseOut" Src="img/menu_icon.png" Style="@MyStyle" Height="30"></MudImage>
+        </MudItem>
+        <MudSpacer />
+        <MudItem xs="4" sm="2" md="1" Class="align-items-center d-flex" Style="flex-shrink: 0;background: linear-gradient(rgb(12, 89, 185) 1%, rgb(19, 158, 233) 6%, rgb(24, 181, 242) 10%, rgb(19, 155, 235) 14%, rgb(18, 144, 232) 19%, rgb(13, 141, 234) 63%, rgb(13, 159, 241) 81%, rgb(15, 158, 237) 88%, rgb(17, 155, 233) 91%, rgb(19, 146, 226) 94%, rgb(19, 126, 215) 97%, rgb(9, 91, 201) 100%);border-left: 1px solid rgb(16, 66, 175);box-shadow: rgb(24, 187, 255) 1px 0px 1px inset;padding: 0px 10px;margin-left: 10px;max-width: 122px; width:122px;">
+            <MudImage Src="img/sound_icon.png" />
+            <MudImage Src="img/hardware_icon.png" />
+            <MudImage Src="img/security_icon.png" />
+            <span style="vertical-align: middle; color: white; font-size: 11px; font-weight: lighter; text-shadow: none; padding-right: 2px; margin-left:auto; margin-right:0;">@time</span>
+        </MudItem>
+    </MudContainer>
+</MudLayout>
+
+@code {
+    string? time;
+    Timer? aTimer;
+    private DateTime UserDate { get; set; }
+    private bool hasStarted = false;
+    string MyStyle { get; set; }
+    void MouseOver(MouseEventArgs e) { MyStyle = "padding: 0; filter: brightness(110%);- webkit - filter: brightness(110%);-moz - filter: brightness(110%);-o - filter: brightness(110%);-ms - filter: brightness(110%); "; }
+    void MouseOut(MouseEventArgs e) { MyStyle = "padding: 0;"; }
+
+    void OpenMenu(MouseEventArgs e){
+        menuState.ShowMenu = true;
+        RefreshService.CallRequestRefresh();
+        StateHasChanged();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender && !hasStarted)
+        {
+            aTimer = new Timer(Tick, null, 0, 1000);
+            hasStarted = true;
+        }
+    }
+
+    private async void Tick(object _)
+    {
+        this.UserDate = await JSRuntime.InvokeAsync<DateTime>("localDate");
+        time = string.Format("{0:hh:mm tt}", UserDate);
+        await InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        aTimer?.Dispose();
+    }
+}
