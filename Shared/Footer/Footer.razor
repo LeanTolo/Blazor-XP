@@ -28,7 +28,7 @@
     void MouseOut(MouseEventArgs e) { MyStyle = "padding: 0;"; }
 
     void OpenMenu(MouseEventArgs e){
-        menuState.ShowMenu = true;
+        menuState.ShowMenu = !menuState.ShowMenu;
         RefreshService.CallRequestRefresh();
         StateHasChanged();
     }

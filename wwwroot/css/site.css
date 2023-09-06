@@ -177,3 +177,13 @@ a, .btn-link {
     width: 22px;
     height: 22px;
 }
+
+.menuRightItemTop:hover {
+    color: white;
+    background-color: rgb(47, 113, 205);
+}
+
+.menuLeftItem:hover {
+    color: white;
+    background-color: rgb(47, 113, 205);
+}
