@@ -1,5 +1,6 @@
 ﻿@inherits LayoutComponentBase
 @inject MenuState menuState;
+@inject IRefreshService RefreshService
 
 
 <MudThemeProvider />
@@ -7,17 +8,11 @@
 <MudSnackbarProvider />
 
 <MudLayout>
-    <MudMainContent >
+    <MudContainer>
         @Body
-    </MudMainContent>
+    </MudContainer>
 </MudLayout>
 
 @code {
-    /*
-     * @onclick="OnClick"
-     * void OnClick(MouseEventArgs e)
-    {
-        menuState.ShowMenu = false;
-        StateHasChanged();
-    }*/
+
 }
