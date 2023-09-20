@@ -1,0 +1,44 @@
+﻿@inject States states
+@inject VarStyles varStyles
+@inject IRefreshService RefreshService
+
+<MudContainer Class="logOffPage modal">
+    <MudContainer Class="logOffModal">
+        <MudItem Class="logOffHeader">
+            <span>Log Off Windows</span>
+            <MudImage Class="logOffHeaderImg" Src="img/windows_logo.png"></MudImage>
+        </MudItem>
+        <MudItem Class="logOffBody">
+            <MudItem Class="logOffBodyItem">
+                <MudImage Src="img/arrow.png" Class="logOffBodyItemImage"></MudImage>
+                <span class="logOffBodyItemText">Switch User</span>
+            </MudItem>
+            <MudItem Class="logOffBodyItem">
+                <MudImage Src="img/close_session.png" Class="logOffBodyItemImage"></MudImage>
+                <span class="logOffBodyItemText">Log Off</span>
+            </MudItem>
+        </MudItem>
+        <MudItem Class="logOffFooter">
+            <MudButton @onclick="CloseLogOffModal" Class="logOffButton">
+                Cancel
+            </MudButton>
+        </MudItem>
+    </MudContainer>
+</MudContainer>
+<style>
+    .backModal {
+        animation: @varStyles.DynamicAnimation;
+        -webkit-animation: @varStyles.DynamicAnimation;
+    }
+</style>
+@code {
+
+    void CloseLogOffModal(MouseEventArgs e)
+    {
+        states.ShowModalUser = false;
+        varStyles.DynamicAnimation = "5s ease 0s 1 normal forwards running none;";
+        RefreshService.CallRequestRefresh();
+        StateHasChanged();
+    }
+
+}

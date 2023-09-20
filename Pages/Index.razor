@@ -1,29 +1,37 @@
 ﻿@page "/"
-@inject MenuState menuState
+@inject States states
+@inject VarStyles varStyles
 @inject IRefreshService RefreshService
 
 
 <PageTitle>Index</PageTitle>
-<MudContainer Style="min-height: 96vh !important" @onclick="CloseMenu">
+
+<MudContainer Style="min-height: 98vh !important; min-width: 100vh !important; background: url(../img/windows_background.jpg) center center / cover no-repeat fixed;" @onclick="CloseMenu" Class="backModal">
     <h1>Hello, world!</h1>
 </MudContainer>
-@if (menuState.ShowMenu == true)
+
+@if (states.ShowMenu == true)
 {
     <FooterMenu></FooterMenu>
 }
 <Footer></Footer>
+@if (states.ShowModalUser == true)
+{
+    <LogOff></LogOff>
+}
 
 @code {
     void CloseMenu(MouseEventArgs e)
     {
-        menuState.ShowMenu = false;
+        states.ShowMenu = false;
         RefreshService.CallRequestRefresh();
         StateHasChanged();
     }
 
     protected override async Task OnInitializedAsync()
     {
-        menuState.ShowMenu = false;
+        states.ShowMenu = false;
+        states.ShowModalUser = false;
         RefreshService.RefreshRequested += StateHasChanged;
     }
 }

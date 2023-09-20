@@ -10,7 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddMudServices();
-builder.Services.AddScoped<MenuState>();
+builder.Services.AddScoped<States>();
+builder.Services.AddScoped<VarStyles>();
 builder.Services.AddScoped<IRefreshService, RefreshService>();
 
 

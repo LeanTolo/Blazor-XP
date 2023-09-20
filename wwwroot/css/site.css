@@ -1,8 +1,7 @@
 @import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
 html, body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    background: url(../img/windows_background.jpg) center center / cover no-repeat fixed;
+    font-family: Tahoma, "Noto Sans", sans-serif;
 }
 
 h1:focus {
@@ -113,6 +112,21 @@ a, .btn-link {
     background: linear-gradient(rgb(66, 130, 214) 0%, rgb(59, 133, 224) 3%, rgb(65, 138, 227) 5%, rgb(65, 138, 227) 17%, rgb(60, 135, 226) 21%, rgb(55, 134, 228) 26%, rgb(52, 130, 227) 29%, rgb(46, 126, 225) 39%, rgb(35, 116, 223) 49%, rgb(32, 114, 219) 57%, rgb(25, 110, 219) 62%, rgb(23, 107, 216) 72%, rgb(20, 104, 213) 75%, rgb(17, 101, 210) 83%, rgb(15, 97, 203) 88%);
 }
 
+.menuFooterItem {
+    padding: 3px;
+    display: flex;
+    margin-right: 10px;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.menuFooterItemImage {
+    border-radius: 3px;
+    margin-right: 2px;
+    width: 22px;
+    height: 22px;
+}
+
 .menuLeft {
     background-color: rgb(255, 255, 255);
     padding: 6px 5px 0px;
@@ -186,4 +200,137 @@ a, .btn-link {
 .menuLeftItem:hover {
     color: white;
     background-color: rgb(47, 113, 205);
+}
+
+.logOffPage {
+    position: fixed;
+    inset: 0px;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+
+.logOffModal {
+    position: absolute;
+    margin-top: 30vh;
+    width: 300px;
+    height: 190px;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+}
+
+.logOffHeader {
+    height: 42px;
+    display: flex;
+    padding-left: 10px;
+    -webkit-box-align: center;
+    align-items: center;
+    background: rgb(9, 33, 120);
+}
+
+    .logOffHeader span {
+        font-size: 18px;
+        font-family: "Noto Sans";
+        font-weight: 400;
+        color: rgb(255, 255, 255);
+        flex: 1 1 0%;
+    }
+
+.logOffHeaderImg {
+    width: auto;
+    height: 30px;
+    margin-right: 5px;
+}
+
+.logOffBody {
+    flex: 1 1 0%;
+    background: linear-gradient(to right, rgb(51, 73, 224) 0%, rgb(97, 126, 230) 47%, rgb(97, 126, 230) 53%, rgb(51, 73, 224) 100%);
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0px 30px;
+    position: relative;
+}
+
+    .logOffBody :before {
+        content: "";
+        display: block;
+        position: absolute;
+        height: 2px;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        background: linear-gradient(to right, transparent 0px, rgba(255, 255, 255, 0.3) 40%, rgba(255, 255, 255, 0.3) 60%, transparent 100%);
+    }
+
+.logOffBodyItem {
+    display: flex;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+    color: rgb(255, 255, 255);
+}
+
+.logOffBodyItemImage {
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 5px;
+    height: 30px;
+    width: 30px;
+}
+    .logOffBodyItemImage:hover {
+        filter: brightness(110%);
+        - webkit - filter: brightness(110%);
+        -moz - filter: brightness(110%);
+        -o - filter: brightness(110%);
+        -ms - filter: brightness(110%);
+    }
+
+.logOffBodyItemText {
+    padding-top: 3px;
+    font-weight: bold;
+    font-size: 11px;
+}
+
+.logOffFooter {
+    height: 42px;
+    background: rgb(9, 33, 120);
+    display: flex;
+    -webkit-box-pack: end;
+    justify-content: flex-end;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.logOffButton {
+    font-size: 11px;
+    padding: 0px 8px;
+    line-height: 10px;
+    background: rgb(240, 240, 240);
+    margin-right: 10px;
+    height: 16px;
+    border-radius: 1px;
+    box-shadow: rgb(0, 5, 176) 2px 2px 4px 1px, white 2px 2px 2px 0px, skyblue 0px 0px 0px 1px inset, skyblue 2px -2px inset;
+    border: none;
+    outline: none;
+}
+
+    .logOffButton:hover {
+        box-shadow: rgb(0, 5, 176) 2px 2px 4px 1px, white 2px 2px 2px 0px, orange 0px 0px 0px 1px inset, orange 2px -2px inset;
+    }
+
+
+@keyframes bodyGrayKeyframe {
+    0% {
+        filter: brightness(1) grayscale(0);
+    }
+
+    30% {
+        filter: brightness(1) grayscale(0);
+    }
+
+    100% {
+        filter: brightness(0.6) grayscale(1);
+    }
 }

@@ -1,4 +1,8 @@
-﻿<MudPaper>
+﻿@inject States states
+@inject VarStyles varStyles
+@inject IRefreshService RefreshService
+
+<MudPaper Class="backModal">
     <MudContainer Class="p-0 m-0 fixed-bottom d-flex mw-100 mh-100 bottomMenu" Style="height:477px;width:384px; bottom: 30px; box-shadow: rgba(0, 0, 0, 0.5) 2px 4px 2px;">
         <MudContainer Class="menuHeader">
             <MudImage Src="img/DogeProfile.jpg" Width="42" Height="42" Style="margin-right: 5px; border-radius: 3px; border: 2px solid rgba(222, 222, 222, 0.8);"> </MudImage>
@@ -72,12 +76,12 @@
                 </MudItem>
                 <MudSpacer />
                 <MudItem Style=" height: 7.5px;background: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0) 100%) content-box;border-top: 3px solid transparent;border-bottom: 3px solid transparent;"></MudItem>
-                <MudItem Class="menuLeftItem container" Style="height:24px !important; background-color: rgb(47, 113, 205);color: rgb(255, 255, 255);">
+                <MudItem Class="menuLeftItem container" Style="height:24px !important;">
                     <div class="menuItemTexts">
-                        <span>
-                            All Programs
-                        </span>
-                        <MudImage Src="img/arrow.ico"></MudImage>
+                        <div style="display:flex;align-items:center; font-weight:700;margin-left:35px;font-size:12px">
+                                All Programs
+                            <MudImage Src="img/arrow.ico" Style="margin-left: 5px;height: 18px;"></MudImage>
+                        </div>
                     </div>
                 </MudItem>
             </MudContainer>
@@ -184,11 +188,30 @@
             </MudContainer>
         </MudContainer>
         <MudContainer Class="menuFooter">
-
+            <MudItem @onclick="OpenLogOffModal" Class="menuFooterItem">
+                <MudImage Src="img/close_session.png" Class="menuFooterItemImage"></MudImage>
+                <span>Log Off</span>
+            </MudItem>
+            <MudItem Class="menuFooterItem">
+                <MudImage Src="img/turn_off.png" Class="menuFooterItemImage"></MudImage>
+                <span>Shut Down</span>
+            </MudItem>
         </MudContainer>
     </MudContainer>
 </MudPaper>
-
+<style>
+    .backModal {
+        animation: @varStyles.DynamicAnimation;
+        -webkit-animation: @varStyles.DynamicAnimation;
+    } 
+</style>
 @code {
-
+    void OpenLogOffModal(MouseEventArgs e)
+    {
+        states.ShowMenu = false;
+        states.ShowModalUser = true;
+        varStyles.DynamicAnimation = "5s ease 0s 1 normal forwards running bodyGrayKeyframe";
+        RefreshService.CallRequestRefresh();
+        StateHasChanged();
+    }
 }
